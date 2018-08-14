@@ -95,14 +95,14 @@ asis_dm(composition=df$composition,dm=85,digits=2)
 ```j_cal``` function converts joule into calorie.  
 
 ``` r
-
+j_cal(joule = 4000, standard = "15")
 ```
 
 #### cal_j
 ```cal_j``` function converts calorie into joule.  
 
 ``` r
-
+cal_j(cal = 5000, standard = "15")
 ```
 
 ### Dataset
