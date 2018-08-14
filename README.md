@@ -1,7 +1,4 @@
 # feed <img src="man/figures/logo.png" align="right" />
-## Notification
-**This package is under development.**
-
 ## Overview
 
 feed is a system for getting the information of animal feeds. Basically, it can load, modify, and compare the animal feed dataset from Animal Feed Resources Information System (INRA CIRAD AFZ and FAO). ~~In addition, the inner dataset from NIAS, NRC, and CVB is loaded~~.   
@@ -10,7 +7,7 @@ feed is a system for getting the information of animal feeds. Basically, it can 
 ``` r
 # The development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("youngjunna/feed")
+devtools::install_github("adatalab/feed")
 ```
 
 ## Usage
@@ -118,6 +115,10 @@ attributes(nrc_beef)$unit
 #or
 str(nrc_beef)
 ```
+
+## Notification
+**This package is under development.**
+
 
 ## Getting helps
 Email: ruminoreticulum@gmail.com
