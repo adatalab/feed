@@ -46,9 +46,9 @@ feed_info <- function(url, extract = 0) {
       
       df[[i]] <- janitor::clean_names(df[[i]])
       df[[i]] <- tibble::as_tibble(df[[i]])
-      # if(is.data.frame(df[[i]]) == TRUE){
-      #   df[[i]][c("Avg", "SD", "Min", "Max", "Nb")] <- as.numeric(as.character(unlist(df[[i]][c("Avg", "SD", "Min", "Max", "Nb")])))
-      # }
+      if(is.data.frame(df[[i]]) == TRUE){
+        df[[i]][c("avg", "sd", "min", "max", "nb")] <- as.numeric(as.character(unlist(df[[i]][c("avg", "sd", "min", "max", "nb")])))
+      }
     }
 
     df <- append(df, footnote)
