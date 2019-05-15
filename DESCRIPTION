@@ -1,6 +1,6 @@
 Package: feed
 Title: Package
-Version: 0.0.0.9000
+Version: 0.9
 Authors@R: person("Youngjun", "Na", email = "ruminoreticulum@gmail.com", role = c("aut", "cre"))
 Description: A package for the animal feed formulation.
 Depends: R (>= 3.4.0),rvest,
@@ -10,11 +10,13 @@ Depends: R (>= 3.4.0),rvest,
 License: GLP-2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Imports: rvest,
     dplyr,
     reshape2,
-    fmsb
+    fmsb,
+    tibble,
+    janitor
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

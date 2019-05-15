@@ -7,6 +7,8 @@
 #' @export
 #' @import rvest
 #' @import dplyr
+#' @import janitor
+#' @import tibble
 #' @examples
 #' feed_info(url="https://www.feedipedia.org/node/556")
 #' feed_info(url="https://www.feedipedia.org/node/556",extract=2)
@@ -31,19 +33,27 @@ feed_info <- function(url, extract = 0) {
 
   if (extract != 0) {
     a <- nutrients[[extract]]
-
+    
     end <- c(which(a[, 2] == "") - 1, nrow(a))
     start <- c(2, which(a[, 2] == "") + 2)
 
     df <- list()
+    
     for (i in 1:length(end)) {
       df[[i]] <- a[start[i]:end[i], ]
       names(df[i]) <- a[start[i] - 1, 1]
       colnames(df[[i]]) <- a[start[i] - 1, ]
+      
+      df[[i]] <- janitor::clean_names(df[[i]])
+      df[[i]] <- tibble::as_tibble(df[[i]])
+      # if(is.data.frame(df[[i]]) == TRUE){
+      #   df[[i]][c("Avg", "SD", "Min", "Max", "Nb")] <- as.numeric(as.character(unlist(df[[i]][c("Avg", "SD", "Min", "Max", "Nb")])))
+      # }
     }
 
     df <- append(df, footnote)
     return(df)
+    
   } else {
     print(nutrients)
     print(list(h1, h2, h3))
