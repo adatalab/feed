@@ -14,19 +14,19 @@ feed_compare(feed1, feed2, name1 = "first", name2 = "second",
 
 \item{name1}{1st feed name that you want to compare.}
 
-\item{radar}{TRUE returns radar chart.}
+\item{name2}{2nd feed name that you want to compare.}
 
-\item{name1}{2nd feed name that you want to compare.}
+\item{radar}{TRUE returns radar chart.}
 }
 \description{
 A function to compare each result of feed composition.
 }
 \examples{
-feed1 <- feed::feed_info("https://www.feedipedia.org/node/556",2)
-feed2 <- feed::feed_info("https://www.feedipedia.org/node/674",3)
+feed1 <- feed::feed_info("https://www.feedipedia.org/node/556", 2)
+feed2 <- feed::feed_info("https://www.feedipedia.org/node/674", 3)
 feed1 <- feed1[[1]]
 feed2 <- feed2[[1]]
-feed_compare(feed1,feed2,name1="corn",name2="sbm",radar=TRUE)
+feed_compare(feed1, feed2, name1 = "corn", name2 = "sbm", radar = TRUE)
 }
 \keyword{feed}
 \keyword{formulation}
