@@ -66,7 +66,7 @@ feed1 <- feed1[[1]]
 feed2 <- feed2[[1]]
 
 # compare the results
-feed_compare(feed1, feed2, name1 = "Corn", name2 = "SBM", radar = TRUE)
+feed_compare(feed1, feed2, radar = TRUE)
 ```
 
 ### Conversion
@@ -101,10 +101,8 @@ cal_j(cal = 5000, standard = "15")
 ```
 
 ### Dataset
-
 ## Notification
 **This package is under development.**
-
 
 ## Getting helps
 Email: ruminoreticulum@gmail.com
