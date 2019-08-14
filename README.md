@@ -74,8 +74,8 @@ feed_compare(feed1, feed2, radar = TRUE)
 `dm_asis` function converts dry-matter basis into as-is basis.
 
 ``` r
-df <- data.frame(nutrient=c("CP", "NDF", "EE", "Ash"), composition = c(10, 30, 5, 2))
-dm_asis(composition=df$composition, dm = 85, digits = 2)
+df <- data.frame(nutrient = c("CP", "NDF", "EE", "Ash"), composition = c(10, 30, 5, 2))
+dm_asis(composition = df$composition, dm = 85, digits = 2)
 ```
 
 #### asis_dm
