@@ -1,12 +1,11 @@
 Package: feed
-Title: Package
-Version: 0.9
+Title: A Tool for Getting the Information of Animal Feeds.
+Version: 0.1.0
 Authors@R: person("Youngjun", "Na", email = "ruminoreticulum@gmail.com", role = c("aut", "cre"))
-Description: A package for the animal feed formulation.
-Depends: R (>= 3.4.0),rvest,
-    dplyr,
-    reshape2,
-    fmsb
+Description: feed is a tool for getting the information of animal feeds. 
+      Basically, it can load, modify, and compare the animal feed dataset 
+      from Animal Feed Resources Information System (INRA CIRAD AFZ and FAO). 
+Depends: R (>= 3.4.0)
 License: GLP-2
 Encoding: UTF-8
 LazyData: true
