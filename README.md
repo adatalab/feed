@@ -53,6 +53,8 @@ feed_info(url = "https://www.feedipedia.org/node/556")
 feed_info(url = "https://www.feedipedia.org/node/556", extract = 2)
 ```
 
+<img src="man/figures/feed_info.gif" width="80%">
+
 #### feed_compare
 `feed_compare` function compares each result of feed composition.
 
