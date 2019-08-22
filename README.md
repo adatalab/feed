@@ -1,6 +1,9 @@
-# feed <img src="man/figures/logo.png" align="right" />
-## Overview
+feed <img src="man/figures/logo.png" align="right" />
+=======================================================
 
+A tool for getting the information of animal feeds.
+
+## Overview
 feed is a tool for getting the information of animal feeds. Basically, it can load, modify, and compare the animal feed dataset from Animal Feed Resources Information System (INRA CIRAD AFZ and FAO).   
 
 ## Installation  
@@ -70,7 +73,12 @@ feed2 <- feed2[[1]]
 # compare the results
 feed_compare(feed1, feed2, radar = TRUE)
 ```
+#### feed_nias
+`feed_nias` is a dataset fram National Institute of Animal Science (South Korea). This dataset contains the information of common feed ingredient used in South Korea. **The dataset contains the Korean language.**
 
+``` r
+feed_nias
+```
 ### Conversion
 #### dm_asis
 `dm_asis` function converts dry-matter basis into as-is basis.
