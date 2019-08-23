@@ -73,12 +73,17 @@ feed2 <- feed2[[1]]
 # compare the results
 feed_compare(feed1, feed2, radar = TRUE)
 ```
+
 #### feed_nias
 `feed_nias` is a dataset fram National Institute of Animal Science (South Korea). This dataset contains the information of common feed ingredient used in South Korea. **The dataset contains the Korean language.**
 
 ``` r
 feed_nias
+
+# find the ingredients by the name
+feed_nias %>% dplyr::filter(grepl("옥수수", .$ingredients))
 ```
+
 ### Conversion
 #### dm_asis
 `dm_asis` function converts dry-matter basis into as-is basis.
