@@ -4,7 +4,7 @@
 \name{feed_nias}
 \alias{feed_nias}
 \title{Feed ingredient table of NIAS.}
-\format{A data frame with XX rows and XX variables}
+\format{A data frame with 1,273 rows and 51 variables}
 \usage{
 feed_nias
 }

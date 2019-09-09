@@ -115,6 +115,13 @@ j_cal(joule = 4000, standard = "15")
 cal_j(cal = 5000, standard = "15")
 ```
 
+### Datasets
+#### amino_acids
+This dataset contains the list and characteristics of amino acids.
+``` r
+amino_acids
+```
+
 ## Notification
 **This package is under development.**
 
