@@ -13,3 +13,11 @@
 #'
 #' @format A data frame with 22 rows and 12 variables
 "amino_acids"
+
+#' List of fatty acids.
+#'
+#' This dataset contains the list and characteristics of
+#' fatty acids.
+#'
+#' @format A list with 2 tibbles (saturated & unsaturated)
+"fatty_acids"

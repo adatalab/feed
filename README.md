@@ -122,8 +122,11 @@ This dataset contains the list and characteristics of amino acids.
 amino_acids
 ```
 
-## Notification
-**This package is under development.**
+#### fatty_acids
+This dataset contains the list and characteristics of saturated and unsaturated fatty acids.
+``` r
+fatty_acids
+```
 
 ## Getting helps
 Email: ruminoreticulum@gmail.com
