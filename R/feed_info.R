@@ -48,7 +48,7 @@ feed_info <- function(url, extract = 0) {
       df[[i]] <- janitor::clean_names(df[[i]])
       df[[i]] <- tibble::as_tibble(df[[i]])
       if(is.data.frame(df[[i]]) == TRUE){
-        df[[i]] %>%
+        df[[i]] <- df[[i]] %>%
           mutate(
             avg = parse_number(avg),
             sd = parse_number(sd),
@@ -68,3 +68,8 @@ feed_info <- function(url, extract = 0) {
     print(list(h1, h2, h3))
   }
 }
+
+
+
+
+
