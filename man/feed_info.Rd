@@ -16,7 +16,7 @@ This function show the result of tables of URL. If you use extract option, a lis
 }
 \examples{
 feed_info(url="https://www.feedipedia.org/node/556")
-feed_info(url="https://www.feedipedia.org/node/556",extract=2)
+feed_info(url="https://www.feedipedia.org/node/556",extract=5)
 }
 \keyword{feed,}
 \keyword{feedipedia}

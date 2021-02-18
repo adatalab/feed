@@ -12,7 +12,7 @@
 #' @import readr
 #' @examples
 #' feed_info(url="https://www.feedipedia.org/node/556")
-#' feed_info(url="https://www.feedipedia.org/node/556",extract=2)
+#' feed_info(url="https://www.feedipedia.org/node/556",extract=5)
 
 feed_info <- function(url, extract = 0) {
   # package
