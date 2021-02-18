@@ -9,13 +9,14 @@
 #' @import dplyr
 #' @import janitor
 #' @import tibble
+#' @import readr
 #' @examples
 #' feed_info(url="https://www.feedipedia.org/node/556")
 #' feed_info(url="https://www.feedipedia.org/node/556",extract=2)
 
 feed_info <- function(url, extract = 0) {
   # package
-  stopifnot(require(rvest), require(dplyr))
+  stopifnot(require(rvest), require(dplyr), require(readr))
 
   html <- read_html(url, encoding = "UTF-8")
 
@@ -33,27 +34,35 @@ feed_info <- function(url, extract = 0) {
 
   if (extract != 0) {
     a <- nutrients[[extract]]
-    
+
     end <- c(which(a[, 2] == "") - 1, nrow(a))
     start <- c(2, which(a[, 2] == "") + 2)
 
     df <- list()
-    
+
     for (i in 1:length(end)) {
       df[[i]] <- a[start[i]:end[i], ]
       names(df[i]) <- a[start[i] - 1, 1]
       colnames(df[[i]]) <- a[start[i] - 1, ]
-      
+
       df[[i]] <- janitor::clean_names(df[[i]])
       df[[i]] <- tibble::as_tibble(df[[i]])
       if(is.data.frame(df[[i]]) == TRUE){
-        df[[i]][c("avg", "sd", "min", "max", "nb")] <- as.numeric(as.character(unlist(df[[i]][c("avg", "sd", "min", "max", "nb")])))
+        df[[i]] %>%
+          mutate(
+            avg = parse_number(avg),
+            sd = parse_number(sd),
+            min = parse_number(min),
+            nb = parse_number(nb)
+          )
+
+        # df[[i]][c("avg", "sd", "min", "max", "nb")] <- as.numeric(as.character(unlist(df[[i]][c("avg", "sd", "min", "max", "nb")])))
       }
     }
 
     df <- append(df, footnote)
     return(df)
-    
+
   } else {
     print(nutrients)
     print(list(h1, h2, h3))
