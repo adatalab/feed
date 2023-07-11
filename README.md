@@ -46,17 +46,12 @@ feed_search("maize")
 ```
 
 #### feed_info
-`feed_info` function shows the nutritive values of the specific feedstuff(url) in the form of a list. If you use extract option, a list is returned for each nutrient composition of the specific feed.
+`feed_info` function shows the nutritive values of the specific feedstuff(url) in the form of a dataframe.
 
 ``` r
 # get the information about the url
 feed_info(url = "https://www.feedipedia.org/node/556")
-
-# extract 2nd objects of nutrient composition dataset list
-feed_info(url = "https://www.feedipedia.org/node/556", extract = 2)
 ```
-
-<img src="man/figures/feed_info.gif" width="80%">
 
 #### feed_compare
 `feed_compare` function compares each result of feed composition.

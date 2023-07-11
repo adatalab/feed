@@ -1,72 +1,67 @@
 #' feed_info
 #'
-#' This function show the result of tables of URL. If you use extract option, a list is returned for each nutrient composition of the specific feed.
+#' This function show the result of tables of URL.
 #' @param url A URL that you want to scraping.
-#' @param extract A number of list for nutreint composition.
 #' @keywords feed, feedipedia
 #' @export
 #' @import rvest
+#' @import tidyr
 #' @import dplyr
 #' @import janitor
 #' @import tibble
 #' @import readr
 #' @examples
 #' feed_info(url="https://www.feedipedia.org/node/556")
-#' feed_info(url="https://www.feedipedia.org/node/556",extract=5)
 
-feed_info <- function(url, extract = 0) {
-  # package
+feed_info <- function(url) {
   stopifnot(require(rvest), require(dplyr), require(readr))
 
-  html <- read_html(url, encoding = "UTF-8")
+  suppressWarnings({
 
-  # names
-  h1 <- html %>% html_nodes("h1") %>% html_text()
-  h2 <- html %>% html_nodes("h2") %>% html_text()
-  h3 <- html %>% html_nodes("h3") %>% html_text()
+    html <- read_html(url, encoding = "UTF-8")
 
-  # nutrients
-  nutrients <- html %>% html_nodes("table") %>% html_table()
-  nutrients <- nutrients[1:ifelse(length(nutrients) - 1 == 0, 1, length(nutrients) - 1)]
+    # names
+    h1 <- html %>% html_nodes("h1") %>% html_text()
+    h2 <- html %>% html_nodes("h2") %>% html_text()
+    h3 <- html %>% html_nodes("h3") %>% html_text()
 
-  footnote <- "The asterisk * indicates that the average value was obtained by an equation."
-  nutrients <- append(nutrients, footnote)
+    # nutrients
+    nutrients <- html %>% html_nodes("table") %>% html_table()
+    list <- lapply(nutrients, function(df) subset(df, df[1, 1] == "Main analysis"))
 
-  if (extract != 0) {
-    a <- nutrients[[extract]]
-
-    end <- c(which(a[, 2] == "") - 1, nrow(a))
-    start <- c(2, which(a[, 2] == "") + 2)
-
-    df <- list()
-
-    for (i in 1:length(end)) {
-      df[[i]] <- a[start[i]:end[i], ]
-      names(df[i]) <- a[start[i] - 1, 1]
-      colnames(df[[i]]) <- a[start[i] - 1, ]
-
-      df[[i]] <- janitor::clean_names(df[[i]])
-      df[[i]] <- tibble::as_tibble(df[[i]])
-      if(is.data.frame(df[[i]]) == TRUE){
-        df[[i]] <- df[[i]] %>%
-          mutate(
-            avg = parse_number(avg),
-            sd = parse_number(sd),
-            min = parse_number(min),
-            nb = parse_number(nb)
-          )
-
-        # df[[i]][c("avg", "sd", "min", "max", "nb")] <- as.numeric(as.character(unlist(df[[i]][c("avg", "sd", "min", "max", "nb")])))
-      }
+    change_colnames <- function(df) {
+      colnames(df) <- unlist(df[1, ])
+      df <- df[-1, ] %>% janitor::clean_names()
+      return(df)
     }
 
-    df <- append(df, footnote)
-    return(df)
+    list <- lapply(list, change_colnames)
+    list <- list[sapply(list, function(df) !(nrow(df) == 0))]
+    h3 <- h3[-c(1:6)]
 
-  } else {
-    print(nutrients)
-    print(list(h1, h2, h3))
-  }
+    if(length(list) == length(h3)) {
+
+      result <- purrr::map2_df(list, h3, function(list, h3) {
+
+          list %>% select(1, 3) %>%
+            filter(!is.na(avg)) %>%
+            mutate(avg = parse_number(avg)) %>%
+            filter(!is.na(avg)) %>%
+            tidyr::pivot_wider(names_from = main_analysis, values_from = avg) %>%
+            mutate(feed = h3) %>%
+            mutate(reference = url) %>%
+            select(feed, reference, everything()) %>%
+            janitor::clean_names()
+
+      })
+
+    } else {result <- tibble()}
+
+  })
+
+
+  return(result)
+
 }
 
 
