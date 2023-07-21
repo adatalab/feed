@@ -27,7 +27,7 @@ feed_info <- function(url) {
 
     # nutrients
     nutrients <- html %>% html_nodes("table") %>% html_table()
-    list <- lapply(nutrients, function(df) subset(df, df[1, 1] == "Main analysis"))
+    list <- lapply(nutrients, function(df) subset(df, df$X1[1] == "Main analysis"))
 
     change_colnames <- function(df) {
       colnames(df) <- unlist(df[1, ])
@@ -43,15 +43,17 @@ feed_info <- function(url) {
 
       result <- purrr::map2_df(list, h3, function(list, h3) {
 
-          list %>% select(1, 3) %>%
-            filter(!is.na(avg)) %>%
-            mutate(avg = parse_number(avg)) %>%
-            filter(!is.na(avg)) %>%
-            tidyr::pivot_wider(names_from = main_analysis, values_from = avg) %>%
-            mutate(feed = h3) %>%
-            mutate(reference = url) %>%
-            select(feed, reference, everything()) %>%
-            janitor::clean_names()
+        list %>%
+          mutate(main_analysis = paste(main_analysis, unit)) %>%
+          select(1, 3) %>%
+          filter(!is.na(avg)) %>%
+          mutate(avg = parse_number(avg)) %>%
+          filter(!is.na(avg)) %>%
+          tidyr::pivot_wider(names_from = main_analysis, values_from = avg) %>%
+          mutate(feed = h3) %>%
+          mutate(reference = url) %>%
+          select(feed, reference, everything()) %>%
+          janitor::clean_names()
 
       })
 
@@ -63,6 +65,7 @@ feed_info <- function(url) {
   return(result)
 
 }
+
 
 
 
