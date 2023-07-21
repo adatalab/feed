@@ -27,7 +27,10 @@ feed_info <- function(url) {
 
     # nutrients
     nutrients <- html %>% html_nodes("table") %>% html_table()
-    list <- lapply(nutrients, function(df) subset(df, df$X1[1] == "Main analysis"))
+    list <- lapply(nutrients, function(df) {
+      if(!is.na(colnames(df)[1]) && colnames(df)[1] == "X1") {subset(df, df$X1[1] == "Main analysis")}
+      else {tibble()}
+      })
 
     change_colnames <- function(df) {
       colnames(df) <- unlist(df[1, ])
