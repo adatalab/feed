@@ -53,21 +53,6 @@ feed_search("maize")
 feed_info(url = "https://www.feedipedia.org/node/556")
 ```
 
-#### feed_compare
-`feed_compare` function compares each result of feed composition.
-
-``` r
-# extract the result
-feed1 <- feed_info("https://www.feedipedia.org/node/556", 2)
-feed2 <- feed_info("https://www.feedipedia.org/node/674", 3)
-
-# extract the main analysis results
-feed1 <- feed1[[1]]
-feed2 <- feed2[[1]]
-
-# compare the results
-feed_compare(feed1, feed2, radar = TRUE)
-```
 ### Conversion
 #### dm_asis
 `dm_asis` function converts dry-matter basis into as-is basis.
